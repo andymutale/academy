@@ -1,0 +1,51 @@
+# Temporary Pexels stock-media manifest
+
+All image assets below are placeholders pending high-quality, academy-owned originals. The existing site photos were replaced site-wide, excluding the academy crest/logo.
+
+photo_3679338: https://images.pexels.com/photos/3679338/pexels-photo-3679338.jpeg?auto=compress&cs=tinysrgb&w=1400
+source_3679338: https://www.pexels.com/photo/group-of-men-playing-rugby-3679338/
+photo_3693105: https://images.pexels.com/photos/3693105/pexels-photo-3693105.jpeg?auto=compress&cs=tinysrgb&w=1400
+source_3693105: https://www.pexels.com/photo/photo-of-men-playing-rugby-3693105/
+photo_8586346: https://images.pexels.com/photos/8586346/pexels-photo-8586346.jpeg?auto=compress&cs=tinysrgb&w=1400
+source_8586346: https://www.pexels.com/photo/men-playing-rugby-8586346/
+photo_3702666: https://images.pexels.com/photos/3702666/pexels-photo-3702666.jpeg?auto=compress&cs=tinysrgb&w=1400
+source_3702666: https://www.pexels.com/photo/group-of-men-playing-rugby-on-grass-field-3702666/
+photo_3698164: https://images.pexels.com/photos/3698164/pexels-photo-3698164.jpeg?auto=compress&cs=tinysrgb&w=1400
+source_3698164: https://www.pexels.com/photo/photo-of-people-playing-football-3698164/
+photo_3639349: https://images.pexels.com/photos/3639349/pexels-photo-3639349.jpeg?auto=compress&cs=tinysrgb&w=1400
+source_3639349: https://www.pexels.com/photo/men-playing-soccer-on-green-grass-field-3639349/
+photo_39703728: https://images.pexels.com/photos/39703728/pexels-photo-39703728.jpeg
+source_39703728: https://images.pexels.com/photos/39703728/pexels-photo-39703728.jpeg
+photo_39629703: https://images.pexels.com/photos/39629703/pexels-photo-39629703.jpeg
+source_39629703: https://images.pexels.com/photos/39629703/pexels-photo-39629703.jpeg
+photo_39704273: https://images.pexels.com/photos/39704273/pexels-photo-39704273.jpeg
+source_39704273: https://images.pexels.com/photos/39704273/pexels-photo-39704273.jpeg
+photo_17341038: https://images.pexels.com/photos/17341038/pexels-photo-17341038.jpeg
+source_17341038: https://images.pexels.com/photos/17341038/pexels-photo-17341038.jpeg
+photo_32471037: https://images.pexels.com/photos/32471037/pexels-photo-32471037.jpeg
+source_32471037: https://images.pexels.com/photos/32471037/pexels-photo-32471037.jpeg
+photo_13527460: https://images.pexels.com/photos/13527460/pexels-photo-13527460.jpeg
+source_13527460: https://images.pexels.com/photos/13527460/pexels-photo-13527460.jpeg
+photo_3639065: https://images.pexels.com/photos/3639065/pexels-photo-3639065.jpeg
+source_3639065: https://images.pexels.com/photos/3639065/pexels-photo-3639065.jpeg
+
+video_38212182: https://www.pexels.com/download/video/38212182/
+video_mp4_38212182: https://videos.pexels.com/video-files/38212182/16221980_1920_1080_30fps.mp4
+video_38212185: https://www.pexels.com/download/video/38212185/
+video_mp4_38212185: https://videos.pexels.com/video-files/38212185/16221999_1920_1080_30fps.mp4
+video_39472067: https://www.pexels.com/download/video/39472067/
+video_mp4_39472067: https://videos.pexels.com/video-files/39472067/16812880_2160_3840_24fps.mp4
+video_37643420: https://www.pexels.com/download/video/37643420/
+video_mp4_37643420: https://videos.pexels.com/video-files/37643420/15956276_1920_1080_30fps.mp4
+
+Temporary stock media must be replaced with academy-approved original assets when supplied.
+
+# Additional responsive renditions used by the homepage scroll-led motion sequence.
+motion_photo_3679338: https://images.pexels.com/photos/3679338/pexels-photo-3679338.jpeg?auto=compress&cs=tinysrgb&w=1000
+motion_poster_3698164: https://images.pexels.com/photos/3698164/pexels-photo-3698164.jpeg?auto=compress&cs=tinysrgb&w=800
+motion_poster_8586346: https://images.pexels.com/photos/8586346/pexels-photo-8586346.jpeg?auto=compress&cs=tinysrgb&w=800
+motion_photo_8586346: https://images.pexels.com/photos/8586346/pexels-photo-8586346.jpeg?auto=compress&cs=tinysrgb&w=1000
+motion_poster_3679338: https://images.pexels.com/photos/3679338/pexels-photo-3679338.jpeg?auto=compress&cs=tinysrgb&w=800
+
+motion_selected_photo_3702666: https://images.pexels.com/photos/3702666/pexels-photo-3702666.jpeg?auto=compress&cs=tinysrgb&w=1000
+motion_selected_source_3702666: https://www.pexels.com/photo/group-of-men-playing-rugby-on-grass-field-3702666/

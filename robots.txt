@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://rugby-academy.netlify.app/sitemap.xml
