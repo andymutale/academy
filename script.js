@@ -10,6 +10,7 @@
   let cursor = null;
   let refreshScrollZoom = () => {};
   let refreshMotionStory = () => {};
+  let refreshHorizontalRail = () => {};
   const storage = {
     get(key) { try { return localStorage.getItem(key); } catch (_) { return null; } },
     set(key, value) { try { localStorage.setItem(key, value); } catch (_) { /* Local preference still applies for this page. */ } }
@@ -47,6 +48,7 @@
     }
     refreshScrollZoom();
     refreshMotionStory();
+    refreshHorizontalRail();
   }
   setTheme(savedTheme === 'dark', false);
   setReducedMotion(reduceMotion, false);
@@ -78,7 +80,6 @@
   // Accessible full-screen site navigation shared across every static page.
   const menuToggle = $('#menu-toggle');
   const mobileNav = $('#mobile-nav');
-  const mobileNavClose = $('#mobile-nav-close');
   let lastMenuFocus = null;
   let menuCloseTimer = 0;
   function openMenu() {
@@ -91,8 +92,10 @@
     document.body.classList.add('menu-open');
     menuToggle.setAttribute('aria-expanded', 'true');
     menuToggle.setAttribute('aria-label', 'Close navigation menu');
-    requestAnimationFrame(() => mobileNav.classList.add('is-open'));
-    mobileNavClose?.focus({ preventScroll: true });
+    requestAnimationFrame(() => {
+      mobileNav.classList.add('is-open');
+      mobileNav.querySelector('.mobile-nav-link')?.focus({ preventScroll: true });
+    });
   }
   function closeMenu(returnFocus = false) {
     if (!mobileNav || !menuToggle || mobileNav.hidden) return;
@@ -104,13 +107,12 @@
     const finishClose = () => { mobileNav.hidden = true; };
     const shouldSkipTransition = root.classList.contains('reduce-motion') || motionQuery.matches;
     if (shouldSkipTransition) finishClose();
-    else menuCloseTimer = window.setTimeout(finishClose, 240);
+    else menuCloseTimer = window.setTimeout(finishClose, 360);
     if (returnFocus && lastMenuFocus && typeof lastMenuFocus.focus === 'function') {
       lastMenuFocus.focus({ preventScroll: true });
     }
   }
   menuToggle?.addEventListener('click', () => mobileNav?.hidden ? openMenu() : closeMenu(true));
-  mobileNavClose?.addEventListener('click', () => closeMenu(true));
   $$('#mobile-nav a').forEach(link => link.addEventListener('click', () => closeMenu(true)));
   mobileNav?.addEventListener('click', event => { if (event.target === mobileNav) closeMenu(true); });
   // Close the overlay if a device rotates into the desktop navigation breakpoint.
@@ -124,7 +126,7 @@
       closeActiveVideo();
     }
     if (event.key === 'Tab' && mobileNav && !mobileNav.hidden) {
-      const focusables = $$('a[href], button:not([disabled]), input:not([disabled]), summary', mobileNav).filter(el => el.getClientRects().length > 0);
+      const focusables = [menuToggle, ...$$('a[href], button:not([disabled]), input:not([disabled]), summary', mobileNav)].filter(el => el && el.getClientRects().length > 0);
       if (!focusables.length) return;
       const first = focusables[0], last = focusables[focusables.length - 1];
       if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
@@ -315,14 +317,14 @@
 
   // Pathway popups use temporary Pexels stock placeholders until academy-owned media is available.
   const publicMedia = {
-    teamA: { src: 'https://images.pexels.com/photos/3679338/pexels-photo-3679338.jpeg?auto=compress&cs=tinysrgb&w=1400', alt: 'Group of men playing rugby; temporary stock image, not Gelvandale Rugby Academy media.', source: 'https://www.pexels.com/photo/group-of-men-playing-rugby-3679338/', credit: 'Pexels stock image · illustrative placeholder' },
-    teamB: { src: 'https://images.pexels.com/photos/3693105/pexels-photo-3693105.jpeg?auto=compress&cs=tinysrgb&w=1400', alt: 'Men playing rugby; temporary stock image, not Gelvandale Rugby Academy media.', source: 'https://www.pexels.com/photo/photo-of-men-playing-rugby-3693105/', credit: 'Pexels stock image · illustrative placeholder' },
-    coach: { src: 'https://images.pexels.com/photos/8586346/pexels-photo-8586346.jpeg?auto=compress&cs=tinysrgb&w=1400', alt: 'Men playing rugby; temporary stock image, not Gelvandale Rugby Academy media.', source: 'https://www.pexels.com/photo/men-playing-rugby-8586346/', credit: 'Pexels stock image · illustrative placeholder' },
-    community: { src: 'https://images.pexels.com/photos/39703728/pexels-photo-39703728.jpeg', alt: 'Pexels stock photo 39703728; illustrative placeholder, not academy media.', source: 'https://images.pexels.com/photos/39703728/pexels-photo-39703728.jpeg', credit: 'Pexels stock image · illustrative placeholder' },
-    namibia: { src: 'https://images.pexels.com/photos/3702666/pexels-photo-3702666.jpeg?auto=compress&cs=tinysrgb&w=1400', alt: 'Rugby on a grass field; temporary stock image, not Gelvandale Rugby Academy media.', source: 'https://www.pexels.com/photo/group-of-men-playing-rugby-on-grass-field-3702666/', credit: 'Pexels stock image · illustrative placeholder' },
-    golf: { src: 'https://images.pexels.com/photos/39629703/pexels-photo-39629703.jpeg', alt: 'Pexels stock photo 39629703; illustrative placeholder, not academy media.', source: 'https://images.pexels.com/photos/39629703/pexels-photo-39629703.jpeg', credit: 'Pexels stock image · illustrative placeholder' },
-    girls: { src: 'https://images.pexels.com/photos/39704273/pexels-photo-39704273.jpeg', alt: 'Pexels stock photo 39704273; illustrative placeholder, not academy media.', source: 'https://images.pexels.com/photos/39704273/pexels-photo-39704273.jpeg', credit: 'Pexels stock image · illustrative placeholder' },
-    enrico: { src: 'https://images.pexels.com/photos/17341038/pexels-photo-17341038.jpeg', alt: 'Pexels stock photo 17341038; illustrative placeholder, not academy media.', source: 'https://images.pexels.com/photos/17341038/pexels-photo-17341038.jpeg', credit: 'Pexels stock image · illustrative placeholder' }
+    teamA: { src: 'https://images.pexels.com/photos/3679338/pexels-photo-3679338.jpeg?auto=compress&cs=tinysrgb&w=800&q=78&fm=webp', alt: 'Group of men playing rugby; temporary stock image, not Gelvandale Rugby Academy media.', source: 'https://www.pexels.com/photo/group-of-men-playing-rugby-3679338/', credit: 'Pexels stock image · illustrative placeholder' },
+    teamB: { src: 'https://images.pexels.com/photos/3693105/pexels-photo-3693105.jpeg?auto=compress&cs=tinysrgb&w=800&q=78&fm=webp', alt: 'Men playing rugby; temporary stock image, not Gelvandale Rugby Academy media.', source: 'https://www.pexels.com/photo/photo-of-men-playing-rugby-3693105/', credit: 'Pexels stock image · illustrative placeholder' },
+    coach: { src: 'https://images.pexels.com/photos/8586346/pexels-photo-8586346.jpeg?auto=compress&cs=tinysrgb&w=800&q=78&fm=webp', alt: 'Men playing rugby; temporary stock image, not Gelvandale Rugby Academy media.', source: 'https://www.pexels.com/photo/men-playing-rugby-8586346/', credit: 'Pexels stock image · illustrative placeholder' },
+    community: { src: 'https://images.pexels.com/photos/39703728/pexels-photo-39703728.jpeg?auto=compress&cs=tinysrgb&w=800&q=78&fm=webp', alt: 'Pexels stock photo 39703728; illustrative placeholder, not academy media.', source: 'https://images.pexels.com/photos/39703728/pexels-photo-39703728.jpeg?auto=compress&cs=tinysrgb&w=800&q=78&fm=webp', credit: 'Pexels stock image · illustrative placeholder' },
+    namibia: { src: 'https://images.pexels.com/photos/3702666/pexels-photo-3702666.jpeg?auto=compress&cs=tinysrgb&w=800&q=78&fm=webp', alt: 'Rugby on a grass field; temporary stock image, not Gelvandale Rugby Academy media.', source: 'https://www.pexels.com/photo/group-of-men-playing-rugby-on-grass-field-3702666/', credit: 'Pexels stock image · illustrative placeholder' },
+    golf: { src: 'https://images.pexels.com/photos/39629703/pexels-photo-39629703.jpeg?auto=compress&cs=tinysrgb&w=800&q=78&fm=webp', alt: 'Pexels stock photo 39629703; illustrative placeholder, not academy media.', source: 'https://images.pexels.com/photos/39629703/pexels-photo-39629703.jpeg?auto=compress&cs=tinysrgb&w=800&q=78&fm=webp', credit: 'Pexels stock image · illustrative placeholder' },
+    girls: { src: 'https://images.pexels.com/photos/39704273/pexels-photo-39704273.jpeg?auto=compress&cs=tinysrgb&w=800&q=78&fm=webp', alt: 'Pexels stock photo 39704273; illustrative placeholder, not academy media.', source: 'https://images.pexels.com/photos/39704273/pexels-photo-39704273.jpeg?auto=compress&cs=tinysrgb&w=800&q=78&fm=webp', credit: 'Pexels stock image · illustrative placeholder' },
+    enrico: { src: 'https://images.pexels.com/photos/17341038/pexels-photo-17341038.jpeg?auto=compress&cs=tinysrgb&w=800&q=78&fm=webp', alt: 'Pexels stock photo 17341038; illustrative placeholder, not academy media.', source: 'https://images.pexels.com/photos/17341038/pexels-photo-17341038.jpeg?auto=compress&cs=tinysrgb&w=800&q=78&fm=webp', credit: 'Pexels stock image · illustrative placeholder' }
   };
   const pathwayDialog = $('#pathway-dialog');
   const pathwayDialogContent = $('#pathway-dialog-content');
@@ -718,6 +720,15 @@
     const attempts = motionVideos.map(video => {
       video.muted = true;
       video.playsInline = true;
+      const deferredSources = [...video.querySelectorAll('source[data-src]')];
+      let sourceAdded = false;
+      deferredSources.forEach(source => {
+        if (!source.getAttribute('src') && source.dataset.src) {
+          source.src = source.dataset.src;
+          sourceAdded = true;
+        }
+      });
+      if (sourceAdded) video.load();
       try { return Promise.resolve(video.play()).then(() => true).catch(() => false); }
       catch (_) { return Promise.resolve(false); }
     });
@@ -738,11 +749,12 @@
     }
   });
 
-  // Videos only begin downloading/playing when the motion panel approaches the viewport.
+  // The panel observer only pauses offscreen videos; downloads start after an explicit Play action.
   if (motionEditor && 'IntersectionObserver' in window) {
     motionObserver = new IntersectionObserver(entries => entries.forEach(entry => {
       if (entry.isIntersecting) {
-        if (!reduceMotion && !motionUserPaused) playMotionVideos();
+        // Do not fetch or autoplay stock videos on scroll; load only after Play clips is activated.
+        if (!motionIsPlaying && motionStatus) motionStatus.textContent = 'Stock video previews are ready. Select Play clips to load them.';
       } else {
         motionVideos.forEach(video => { try { video.pause(); } catch (_) { /* Ignore unloaded media. */ } });
         setMotionPlaybackState(false, 'Stock video previews are paused while this section is off-screen.');
@@ -777,7 +789,6 @@
     if (reduceMotion || motionQuery.matches || !window.gsap || !window.ScrollTrigger) {
       motionVideos.forEach(video => { try { video.pause(); } catch (_) { /* Ignore media not ready. */ } });
       setMotionPlaybackState(false, 'Stock video previews are paused. Use Play clips to start them.');
-      if (!reduceMotion && !motionQuery.matches && motionEditor.getBoundingClientRect().top < window.innerHeight && !motionUserPaused) playMotionVideos();
       return;
     }
 
@@ -834,10 +845,71 @@
     });
     window.ScrollTrigger.refresh();
 
-    if (motionEditor.getBoundingClientRect().top < window.innerHeight && !motionUserPaused) playMotionVideos();
   };
 
   refreshMotionStory();
+
+  // Desktop/tablet horizontal media storytelling, driven by the user's vertical scroll.
+  // On narrow phones the rail stays natively swipeable: no pinned-scroll hijacking.
+  const mediaSection = $('.media-section');
+  const mediaRail = $('.media-rail', mediaSection || document);
+  let horizontalMediaContext = null;
+
+  refreshHorizontalRail = () => {
+    if (horizontalMediaContext) {
+      horizontalMediaContext.revert();
+      horizontalMediaContext = null;
+    }
+    if (reduceMotion || !mediaSection || !mediaRail || !window.gsap || !window.ScrollTrigger) return;
+
+    const gsap = window.gsap;
+    const ScrollTrigger = window.ScrollTrigger;
+    gsap.registerPlugin(ScrollTrigger);
+    horizontalMediaContext = gsap.matchMedia();
+    horizontalMediaContext.add('(min-width: 801px) and (prefers-reduced-motion: no-preference)', () => {
+      const viewport = mediaRail.parentElement;
+      if (!viewport) return;
+
+      mediaSection.classList.add('is-horizontal-pinned');
+      mediaRail.classList.add('is-gsap-horizontal');
+
+      const getDistance = () => Math.max(0, mediaRail.scrollWidth - viewport.clientWidth);
+      if (getDistance() < 24) {
+        mediaSection.classList.remove('is-horizontal-pinned');
+        mediaRail.classList.remove('is-gsap-horizontal');
+        return;
+      }
+
+      const tween = gsap.to(mediaRail, {
+        x: () => -getDistance(),
+        ease: 'none',
+        overwrite: true,
+        scrollTrigger: {
+          trigger: mediaSection,
+          start: 'top top+=88',
+          end: () => `+=${Math.max(getDistance(), window.innerHeight * 0.45)}`,
+          pin: true,
+          scrub: 0.75,
+          invalidateOnRefresh: true,
+          anticipatePin: 1
+        }
+      });
+
+      // Recalculate once image/layout dimensions settle, while avoiding an extra RAF loop.
+      const refreshAfterLoad = () => ScrollTrigger.refresh();
+      window.addEventListener('load', refreshAfterLoad, { once: true });
+
+      return () => {
+        window.removeEventListener('load', refreshAfterLoad);
+        tween.scrollTrigger?.kill();
+        tween.kill();
+        gsap.set(mediaRail, { clearProps: 'transform' });
+        mediaSection.classList.remove('is-horizontal-pinned');
+        mediaRail.classList.remove('is-gsap-horizontal');
+      };
+    });
+  };
+  refreshHorizontalRail();
 
   // Dynamic copyright year.
   const year = $('[data-year]'); if (year) year.textContent = String(new Date().getFullYear());

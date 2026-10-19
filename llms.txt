@@ -1,0 +1,21 @@
+# Gelvandale Rugby Academy
+
+> A community-centred rugby development effort in Gelvandale, Gqeberha, Eastern Cape, South Africa. This website is a concept preview; stock media is temporary and current programme/contact details require confirmation from the academy.
+
+## Main pages
+- Home: https://rugby-academy.netlify.app/
+- About Us: https://rugby-academy.netlify.app/our-story/
+- Programs: https://rugby-academy.netlify.app/player-pathway/
+- News: https://rugby-academy.netlify.app/news/
+- Community impact: https://rugby-academy.netlify.app/impact/
+- Media: https://rugby-academy.netlify.app/media/
+- Support: https://rugby-academy.netlify.app/support/
+- Contact: https://rugby-academy.netlify.app/contact/
+
+## Content notes
+- Photographs and videos marked as stock are illustrative placeholders, not academy documentary media.
+- Programme availability, eligibility, intake dates, and official contact details should be confirmed directly with the academy.
+- Published reporting and quotations are linked to their source pages.
+
+## Crawl guidance
+- Sitemap: https://rugby-academy.netlify.app/sitemap.xml
